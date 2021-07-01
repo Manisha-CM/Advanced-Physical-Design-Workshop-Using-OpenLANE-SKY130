@@ -39,11 +39,11 @@ Assembler converts the compiler instructions to binary language  which can be un
 ### DIGITAL ASIC DESIGN
   To design ASIC,the following components should always be present
   
-  1.RTL IP - eg:Opencores,Librecores
+  1.RTL IP - eg: Opencores,Librecores
   
-  2.EDA TOOLS - eg:Qflow,OpenROAD,OpenLANE
+  2.EDA TOOLS - eg: Qflow,OpenROAD,OpenLANE
   
-  3.PDK DATA -eg:Google+Skywater 
+  3.PDK DATA -eg: Google+Skywater 
 
   With the growth of opensource design websites the availability of these components are hugely increased.
 
@@ -67,7 +67,7 @@ Assembler converts the compiler instructions to binary language  which can be un
   
   Places the gate level netlist cells on the virtual rows.The connected cells are placed closer in order to reduce the interconnect delays and to achieve optimized routing.
   
-   4.**Clock Tree Synthesis**
+  4.**Clock Tree Synthesis**
   
   Creates a clock distribution network where the distribution resembles a tree,the clock source being the parent node and all the components functioning with the clocks acting like leaf nodes.
   
@@ -164,6 +164,42 @@ To run synthesis the following command is used
 The generated netlist looks like the following
 
 ![netlist](https://user-images.githubusercontent.com/86793947/124171184-d9a7d700-dac5-11eb-80ed-881c462cafc0.PNG)
+
+
+## DAY 2-Floorplanning and Introduction to Standard Cells
+
+### CHIP FLOOR PLANNING CONSIDERATIONS
+
+1.Definition of core and die width and height
+
+2.Locations of preplaced cells
+
+3.Placement of decoupled capacitors
+
+4.Pin placement
+
+5.Logical cell placement blockage
+
+**Definition of core and die width and height**:  The core and die area depends on the dimensions of logic gates,hence the dimensions of the chip.The dimensions of the core and die is also dependent on the standard cell dimensions.The wires doesn't contribute to these dimensions.
+
+**Utilization factor** :Utilization factor is defined as the area occupied by the netlist defined circuit in the core.Itt can be calculated as
+
+     Utilizaion factor = Area occupied by the netlist
+                        --------------------------------
+                         Total area of the core
+                         
+**Aspect ratio** :  Aspect ratio can specify the shape of the chip. An aspect ratio of 1 discribes the chip as a square else it is a rectagle.Aspect ratio can be calcuated by
+
+    Aspect ratio = Height
+                  --------
+                   Width
+
+**Preplaced cells** : A huge circuit can be granularized into smaller circuits and can be black-boxed.These IP's can be instatiated many times but one time implementation is enough.
+
+**Decoupling Capacitors** : Decoupling capacitors are placed local to preplaced cells during Floorplanning.When a particular toggle happens in a circuit,these decoupling capacitors will send current to the circuit and there will be no voltage drop.Whenever there is no switching ,the capacitor refreshes itself by charging to its maximum extent.
+
+**Power Planning ** : **Power planning during is very important to lower noise in digital circuits.This will resolve issues like ground bounce and voltage droop Coupling capacitance is formed between interconnect wires and the substrate which needs to be charged or discharged to represent either logic 1 or logic 0. When a transition occurs on a net, charge associated with coupling capacitors may be dumped to ground. If there are not enough ground taps charge will accumulate at the tap and the ground line will act like a large resistor, raising the ground voltage and lowering our noise margin. To bypass this problem a robust PDN with many power strap taps are needed to lower the resistance associated with the PD**
+
 
 
 
