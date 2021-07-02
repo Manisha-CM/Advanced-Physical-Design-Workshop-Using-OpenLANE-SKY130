@@ -370,13 +370,51 @@ The spice file contains the following parameters
 
 Here we have edited the netlist to run transient analysis as follows 
 
-![image](https://user-images.githubusercontent.com/86793947/124275068-a4e85e00-db5f-11eb-971b-afd6b8816535.png)
+![image](https://user-images.githubusercontent.com/86793947/124312707-61a4e400-db8d-11eb-8ba1-a792c67958d9.png)
 
 To invoke ngspice use the command
     
     ngspice sky130Ainv.spice
     
-  ![image](https://user-images.githubusercontent.com/86793947/124289140-9dc94c00-db6f-11eb-9de6-5517bb1ed25e.png)
+  ![image](https://user-images.githubusercontent.com/86793947/124314520-29eb6b80-db90-11eb-9d5a-25f9b48416a2.png)
+
+  
+  The output of the spice window properly depicts the functionality of an inverter
+  
+  ![image](https://user-images.githubusercontent.com/86793947/124314620-4edfde80-db90-11eb-996b-374ec131ee05.png)
+
+Four timing parameters are calculated.They are:
+
+Rise transition delay = Time taken for the output signal to reach from 20%  to 80% of max value.
+
+Fall transition delat = Time taken for the output signal to reach from 80% to 20% of max value.
+
+Cell rise delay = Time difference between 50% of rising output and 50% of falling output
+
+Cell fall delay = Time difference between 50% of falling output and 50% of rising output
+
+Eg:
+
+Rise transition delay:
+
+20% of max value 
+
+![image](https://user-images.githubusercontent.com/86793947/124315196-38865280-db91-11eb-9f4f-d821308ac2c4.png)
+
+80% of max value
+
+![image](https://user-images.githubusercontent.com/86793947/124315594-c6623d80-db91-11eb-91dd-ce5177680b92.png)
+
+Rise time =80%-20%
+
+**CREATING A LEF FILE**
+
+We will use the inverter layout and create a lef file.This lef file will be used to plug in to the picorv32a and then observe the challenges.
+
+
+
+
+
   
   
 
