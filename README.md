@@ -148,7 +148,7 @@ For this lab,the picorv32a design is considered.So this design should be prepare
        
   ![prepdesign](https://user-images.githubusercontent.com/86793947/124169990-81bca080-dac4-11eb-8ad9-4853716fa7e0.PNG)
   
-**Synthesis**
+## SYTHESIS
 
 To run synthesis the following command is used
     
@@ -205,45 +205,100 @@ The generated netlist looks like the following
 
 **Logical Cell Placement Block** :Logical Cell Placement blocks are placed to differentiate between the core area and the I/O area.Cells should not be placed in the area where the pins are placed.
 
+## FLOORPLANNING 
+
+To run floorplanning the following command is used
+
+    run_floorplan
+  
+  ![run_floorplan](https://user-images.githubusercontent.com/86793947/124254811-136cf200-db47-11eb-9412-22501833abe9.PNG)
+ 
+ The floorplan is run according to the configurations provided in the config.tcl file.
+   
+   ![floordone](https://user-images.githubusercontent.com/86793947/124255099-6a72c700-db47-11eb-9b6f-fd42dfbfc4ac.PNG)
+
+The obtained floorplan can also be viewed in magic using the command
+    
+    magic -T /home/Desktop/username/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef/ def read picorv32a.floorplan.def &
+
+![image](https://user-images.githubusercontent.com/86793947/124256635-27195800-db49-11eb-8913-005042a44f62.png)
+
+View after executing floorplan in magic
+
+![floorplan](https://user-images.githubusercontent.com/86793947/124258780-69dc2f80-db4b-11eb-8679-2c7eb79d3b8a.PNG)
+
+When zooming into the floorplan,we could see the standared cells and the input /output ports
+
+![closer look at standard cells after placement](https://user-images.githubusercontent.com/86793947/124258875-87a99480-db4b-11eb-9236-ccf6d46b43cc.PNG)
 
 
+## PLACEMENT
+
+Placement is done in two stages :
 
 
+1.Global placement
 
+2.Local placement
+ 
+Global placement doesn't focus on legalizing the cells.They can be overlapped or even placed outside the boundary but in local placement the randomly placed cells are legalized and the placement is optimized.
 
+To run placement use the following command
+   
+    run_placement
+    
+   ![run_placement](https://user-images.githubusercontent.com/86793947/124258692-516c1500-db4b-11eb-8b82-75e34bd8756f.PNG)
+   
+After running placement it looks like the following
 
+   ![placement report](https://user-images.githubusercontent.com/86793947/124259037-b293e880-db4b-11eb-82c8-d7a2710b38aa.PNG)
 
+This can also be viewed in magic using a command similar to that of the one used to view the floorplan
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   ![placementmagic](https://user-images.githubusercontent.com/86793947/124259306-fedf2880-db4b-11eb-9a65-0eb7856e8200.PNG)
 
 
 ## DAY-3 -Library Cell Design Using Magic and ngspice
  
 ### SPICE DECK 
+
+Deck wrappers are required to be generated around model files for standard cell simulation.
+
+1.Connectvity of Components
+
+2.Component Values
+
+3.Identification of nodes
+
+To plot the output waveform of the spice deck  ngspice is used. The steps followed to run the spice deck is ngspice is:
+
+Source the .cir spice deck file  using the command `source spicedeck.cir`
+
+`run`command is used to run the spice file
+
+`setplot` allows to view plots possible in the simulations specified in the spice deck
+
+Select the simulation by entering the  name of the simulation in the terminal
+
+`display` command is used to see nodes for plotting
+
+ ### 16 MASK CMOS PROCESS
+ 
+ 1.**Selecting a substrate** : a base where the whole chip is being fabricated.P type silicon substrate is mostly preferred.
+ 
+ 2.**Creating active regions for transistors** : The PMOS and NMOS are placed in the small pockets called the active region.These pockets should be isolated so they dont          interfere with each other.The pockets are created using photoithography
+ 
+ 3.**N well and P well formartion** :N well will be used for pmos fabrication while p well is used for nmos fabrication.
+ 
+ 4.**Gate formation** : The doping contentration and the oxide capacitance are two important parameters to control the Threshold voltage.Threshold voltage decides the              functioning of the gate
+ 
+ 5.**Formation of Lightly Doped Drain (LDD)** : A doping profile is achieved to avoid hot electron and short channel effects.
+ 
+ 6.**Source and Drain formation** :
+ 
+ 7.**Contacts & local interconnect Creation** :
+ 
+ 8.**Higher Level metal layer formation** :
 
 ### CMOS INVERTER ngspice SIMULATIONS
 
@@ -268,10 +323,7 @@ To view the layout ,the following command is used
  The layout of the inverter appears in the magic and looks as follows
  
  ![image](https://user-images.githubusercontent.com/86793947/124232428-460af080-db2f-11eb-9579-1bd33d9835f5.png)
-
-
-
-
+ 
 
       
   
