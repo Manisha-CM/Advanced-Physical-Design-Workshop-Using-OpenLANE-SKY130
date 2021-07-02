@@ -376,6 +376,11 @@ To invoke ngspice use the command
     
     ngspice sky130Ainv.spice
     
+  ![image](https://user-images.githubusercontent.com/86793947/124289140-9dc94c00-db6f-11eb-9de6-5517bb1ed25e.png)
+  
+  
+
+    
 
 
 
