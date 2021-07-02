@@ -148,7 +148,7 @@ For this lab,the picorv32a design is considered.So this design should be prepare
        
   ![prepdesign](https://user-images.githubusercontent.com/86793947/124169990-81bca080-dac4-11eb-8ad9-4853716fa7e0.PNG)
   
-## SYTHESIS
+## SYNTHESIS
 
 To run synthesis the following command is used
     
@@ -294,11 +294,11 @@ Select the simulation by entering the  name of the simulation in the terminal
  
  5.**Formation of Lightly Doped Drain (LDD)** : A doping profile is achieved to avoid hot electron and short channel effects.
  
- 6.**Source and Drain formation** :
+ 6.**Source and Drain formation** : Source and drain are formed. 
  
- 7.**Contacts & local interconnect Creation** :
- 
- 8.**Higher Level metal layer formation** :
+ 7.**Contacts & local Interconnect Creation** :Removing the screen oxide and opens up the source drain and gate region to build the contacts.TiN layer is used for local            communication.
+  
+ 8.**Higher Level metal layer formation** : Deposition on upper layers of metal and contact holes are drilled.
 
 ### CMOS INVERTER ngspice SIMULATIONS
 
@@ -323,6 +323,69 @@ To view the layout ,the following command is used
  The layout of the inverter appears in the magic and looks as follows
  
  ![image](https://user-images.githubusercontent.com/86793947/124232428-460af080-db2f-11eb-9579-1bd33d9835f5.png)
+ 
+ The color palletes present in the magic tools helps us to figure out the layers in the layout.From the layout ,it can be seen that the gate of the both transisitors are connected to the input and the drain of both the transistors to the output,the source of nmos to ground and the source of pmos to vdd.This basically sinifies the structure of an inverter.
+ 
+ ![image](https://user-images.githubusercontent.com/86793947/124268076-af522a00-db56-11eb-8111-36f6b83b2f1d.png)
+
+The top right corner specifies the name of the alyer for each of the color selected.
+
+To get to know the particular device formation,select an area and type `what` in the tkcon window.It gives the information regarding the device 
+
+![image](https://user-images.githubusercontent.com/86793947/124268481-2edff900-db57-11eb-8127-167827692a84.png)
+
+To check the connections ,press S twice while placing the cursor near the required connection.The white highlighted region confirms the connection.
+
+![image](https://user-images.githubusercontent.com/86793947/124268753-8e3e0900-db57-11eb-80e3-28e9d0d089d2.png)
+
+**CHECKING OF DRC ERRORS**
+
+When there are DRC errors it is denoted by white dotted lines and are also specified in the DRC tab above the window.
+
+![image](https://user-images.githubusercontent.com/86793947/124270110-618af100-db59-11eb-9d37-917743da1a2d.png)
+
+**EXTRACTING SPICE NETLIST**
+
+To extract the layout on spice open the tkcon window and use the command `extract all`
+
+![image](https://user-images.githubusercontent.com/86793947/124270446-d78f5800-db59-11eb-8941-fec7d609eb58.png)
+
+Now when we check the vsdstdcelldesign directory a new file of .ext extension appears which is the extracted file.
+
+![image](https://user-images.githubusercontent.com/86793947/124270674-263cf200-db5a-11eb-88ce-cf585ccc29c4.png)
+
+This ext file is used to create the spice file to use with the ngspice tool.
+
+The parasitic capacitances have been removed and the file is extraced to spice through the following commands
+
+![image](https://user-images.githubusercontent.com/86793947/124271094-a95e4800-db5a-11eb-8415-718c15ffdc45.png)
+
+This creates a .spice file in the vsdstdcelldesign directory
+
+![image](https://user-images.githubusercontent.com/86793947/124271194-c98e0700-db5a-11eb-914f-eef7f632d229.png)
+
+The spice file contains the following parameters
+
+![image](https://user-images.githubusercontent.com/86793947/124271323-f6dab500-db5a-11eb-9595-e59ed363959a.png)
+
+Here we have edited the netlist to run transient analysis as follows 
+
+![image](https://user-images.githubusercontent.com/86793947/124275068-a4e85e00-db5f-11eb-971b-afd6b8816535.png)
+
+To invoke ngspice use the command
+    
+    ngspice sky130Ainv.spice
+    
+
+
+
+
+
+
+
+
+
+
  
 
       
