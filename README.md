@@ -11,7 +11,8 @@
 4.OpenLANE ASIC Flow
 ```
 ### DAY 2
-### DAY 3
+### DAY 3 -Library Cell Design using Magic and ngspice
+
 ### DAY 4
 ### DAY 5
 
@@ -198,7 +199,75 @@ The generated netlist looks like the following
 
 **Decoupling Capacitors** : Decoupling capacitors are placed local to preplaced cells during Floorplanning.When a particular toggle happens in a circuit,these decoupling capacitors will send current to the circuit and there will be no voltage drop.Whenever there is no switching ,the capacitor refreshes itself by charging to its maximum extent.
 
-**Power Planning ** : **Power planning during is very important to lower noise in digital circuits.This will resolve issues like ground bounce and voltage droop Coupling capacitance is formed between interconnect wires and the substrate which needs to be charged or discharged to represent either logic 1 or logic 0. When a transition occurs on a net, charge associated with coupling capacitors may be dumped to ground. If there are not enough ground taps charge will accumulate at the tap and the ground line will act like a large resistor, raising the ground voltage and lowering our noise margin. To bypass this problem a robust PDN with many power strap taps are needed to lower the resistance associated with the PD**
+**Power Planning** : Power planning is done on a global level and it is very important for digital circuits which are prone to voltage droop and ground bounce.Whenever all the capacitors discharge to the same ground tap point,there will be a bump in the ground tap point.This is called ground bounce.Similarly if the voltage reduction takes place when the supply voltage is tapped from the same point,its called voltage droop.Instead of a single power supply,if there are multiple power supplies,these issues can be avoided.
+
+**Pin Placement** :The placement of input/output ports vary from designer to designer.Ordering of these ports are completely random and this depends on the placement of the cells.Ports can be placed close to the cells which make use of them.The design shoud be properly known to arrange the pins. In many cases, optimal pin placement will be accompanied with less buffering and therefore less power consumption.
+
+**Logical Cell Placement Block** :Logical Cell Placement blocks are placed to differentiate between the core area and the I/O area.Cells should not be placed in the area where the pins are placed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## DAY-3 -Library Cell Design Using Magic and ngspice
+ 
+### SPICE DECK 
+
+### CMOS INVERTER ngspice SIMULATIONS
+
+The inverter cell will take time to build from scratch so the .mag file can be downloaded from github.From the .mag file the post layout simulation can be done in ngspice and post characterizing the cell.This is plugged into a picorv32 design and the observations are noted.
+
+The github repository to clone the cell is as follows
+
+    git clone https://github.com/nickson-jose/vsdstdcelldesign.git
+    
+ ![image](https://user-images.githubusercontent.com/86793947/124231103-7a7dad00-db2d-11eb-8c48-39803db4606d.png)
+
+The tech file for the magic will be present in the pdk directory and it can be copied to the vsdstdcelldesign directory
+
+![image](https://user-images.githubusercontent.com/86793947/124232004-aa798000-db2e-11eb-9627-6dbf320e518e.png)
+
+To view the layout ,the following command is used 
+
+    magic -T sky130A.tech sky130_inv.mag &
+
+ ![image](https://user-images.githubusercontent.com/86793947/124232270-12c86180-db2f-11eb-81ec-b715ce90e2f5.png)
+ 
+ The layout of the inverter appears in the magic and looks as follows
+ 
+ ![image](https://user-images.githubusercontent.com/86793947/124232428-460af080-db2f-11eb-9579-1bd33d9835f5.png)
 
 
 
