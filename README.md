@@ -328,7 +328,7 @@ To view the layout ,the following command is used
  
  ![image](https://user-images.githubusercontent.com/86793947/124268076-af522a00-db56-11eb-8111-36f6b83b2f1d.png)
 
-The top right corner specifies the name of the alyer for each of the color selected.
+The top right corner specifies the name of the layer for each of the color selected.
 
 To get to know the particular device formation,select an area and type `what` in the tkcon window.It gives the information regarding the device 
 
@@ -462,7 +462,7 @@ So this has created a lef life in the same name as the standard cell design
    
 A closer look at the lef file illustrates that the ports have been assigned as pins and all the changes we made in magic has been reflected in here.
 
-    ![image](https://user-images.githubusercontent.com/86793947/124345142-a57f0400-dbf4-11eb-87bd-e5e0e9d7aaee.png)
+   ![image](https://user-images.githubusercontent.com/86793947/124345142-a57f0400-dbf4-11eb-87bd-e5e0e9d7aaee.png)
     
  Before plugging them into the picorv32a design ,the files are being copied into the src folder under designs.
  
