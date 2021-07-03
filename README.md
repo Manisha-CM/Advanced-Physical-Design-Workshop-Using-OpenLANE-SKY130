@@ -466,6 +466,57 @@ A closer look at the lef file illustrates that the ports have been assigned as p
     
  Before plugging them into the picorv32a design ,the files are being copied into the src folder under designs.
  
+ ![image](https://user-images.githubusercontent.com/86793947/124345274-8c2a8780-dbf5-11eb-93ab-237e7d5fdc11.png)
+
+ Now the first step into mapping the standard cells is the synthesis.The abc step maps the netlist to the library cells.,so a library is required which has the cell definition.This is present in the libs folder under vsdstdcelldesign
+ 
+ ![image](https://user-images.githubusercontent.com/86793947/124345393-2ee30600-dbf6-11eb-9aff-3ed9f75148ea.png)
+
+The library files are also moved to the src folder
+
+![image](https://user-images.githubusercontent.com/86793947/124345583-64d4ba00-dbf7-11eb-8956-4c698f5bea70.png)
+
+The next step is to modify the config.tcl file
+
+![image](https://user-images.githubusercontent.com/86793947/124346001-e88fa600-dbf9-11eb-8473-5c9f4f737ab2.png)
+
+Now the docker is invoked and the openlane flow is performed.
+
+Overwrite previous run to include new configuration switches by using 
+
+![image](https://user-images.githubusercontent.com/86793947/124362289-a42ff480-dc51-11eb-9d45-224660e69d0d.png)
+
+To include the extra lef cells add the following comments
+
+    set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+    add_lefs -src $lefs 
+    
+ ![image](https://user-images.githubusercontent.com/86793947/124362566-53210000-dc53-11eb-9ada-f2eef877ef31.png)
+ 
+ ## SLACK VIOLATIONS FIXES
+ 
+ Negative slack is not ideal to any design,so the slack values will have to be optimized and bought up to a positive value.Hence some changes could be made in the configuration directory
+ 
+ ![image](https://user-images.githubusercontent.com/86793947/124363148-3e466b80-dc57-11eb-9fd6-9277efc257f8.png)
+
+The implemented changes are as follows and the synthesis is run again
+
+![image](https://user-images.githubusercontent.com/86793947/124363573-a5651f80-dc59-11eb-9628-b037fd4dda32.png)
+
+The slack time has reduced to zero 
+
+![image](https://user-images.githubusercontent.com/86793947/124363610-e3624380-dc59-11eb-853c-d820518f3646.png)
+
+
+
+
+
+    
+    
+
+
+
+ 
     
 
 
