@@ -407,9 +407,79 @@ Rise transition delay:
 
 Rise time =80%-20%
 
-**CREATING A LEF FILE**
+## DAY 4 - Timing Analysis and Clock Tree Synthesis
 
-We will use the inverter layout and create a lef file.This lef file will be used to plug in to the picorv32a and then observe the challenges.
+## EXTRACTING LEF FILES
+
+The lef files are extracted and plugged into the picorv32a design and the challenges are observed
+
+Technology LEF - Contains layer information, via information, and restricted DRC rules
+Cell LEF - Abstract information of standard cells
+
+There are two conditions
+
+1.The ports should be on the intersection on the horizontal and vertcial track.
+
+2.The width of the standard cell should be in odd multiples of x pitch in that layer.
+
+Tracks are used in the routing stage.Tracks can be laid over the routes.The track information is present in the pdk files as tracks.info file
+
+![image](https://user-images.githubusercontent.com/86793947/124344456-de68aa00-dbef-11eb-9042-83aa5aa1b01e.png)
+
+For an li1 layer the horizontal offset is 0.23 and has a pitch of 0.46 for the X pitch.Similarly the track information for Y is also present.This is present for every metal layer.The ports should be on the intersection on the horizontal and vertcial track.
+
+To verify if the ports of the standard cell A and Y are actually a part of the intersection ,we use the grid option,by pressing g on the layout window so that the grids get activated.
+
+![image](https://user-images.githubusercontent.com/86793947/124344580-b0379a00-dbf0-11eb-9706-7676e97b94da.png)
+
+We can also make grids from the information provided in the tracks.info file as
+
+![image](https://user-images.githubusercontent.com/86793947/124344652-35bb4a00-dbf1-11eb-8444-f5df1186bb19.png)
+
+Now the grid sizes have been changed according to the track definition
+
+![image](https://user-images.githubusercontent.com/86793947/124344699-774bf500-dbf1-11eb-9bb8-9baf54bbd26f.png)
+
+Here we can observe that the input and the output ports have both the horizontal and the vertical track intersecting so that the routes can reach from input to outputs.
+
+![image](https://user-images.githubusercontent.com/86793947/124344745-c3973500-dbf1-11eb-88ac-86532739ac60.png)
+
+The second condition is that the  width of the standard cell should be in odd multiples of x pitch in that layer
+
+In this we see that there are 2 complete grids and half on each side of the boundary which makes it 3,odd multiple.
+
+![image](https://user-images.githubusercontent.com/86793947/124344814-47512180-dbf2-11eb-8dfa-754e0493c57b.png)
+
+When we extract the lef files ,the ports are considered as pins.
+
+   To extract the lef file use the `lef write` command in the tkcon window
+   
+   ![image](https://user-images.githubusercontent.com/86793947/124345048-ef1b1f00-dbf3-11eb-898f-400e65ef33c7.png)
+
+So this has created a lef life in the same name as the standard cell design
+ 
+   ![image](https://user-images.githubusercontent.com/86793947/124345079-1ffb5400-dbf4-11eb-9af4-31b4a1efaf94.png)
+   
+A closer look at the lef file illustrates that the ports have been assigned as pins and all the changes we made in magic has been reflected in here.
+
+    ![image](https://user-images.githubusercontent.com/86793947/124345142-a57f0400-dbf4-11eb-87bd-e5e0e9d7aaee.png)
+    
+ Before plugging them into the picorv32a design ,the files are being copied into the src folder under designs.
+ 
+    
+
+
+
+
+
+
+
+
+
+
+### TIMING MODELING USING DELAY TABLES
+
+
 
 
 
