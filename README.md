@@ -1,8 +1,11 @@
 # Advanced-Physical-Design-Workshop-Using-OpenLANE-SKY130
+
 ![image](https://user-images.githubusercontent.com/86793947/124155404-14087880-dab4-11eb-8824-a9484566fc18.png)
+
 ## TABLE OF CONTENTS
+
 ### ABOUT THIS WORKSHOP
-   A 5 day workshop focusing on both theoritical and practical concepts of the RTL to GDSII flow with the help of opensource tool OpenLANE .The tool used the Google Skywater 130nm PDK files for the implementation.
+
 ### DAY 1-Introduction to Open Source EDA'S,openLANE and SKY130
 ```
 1.How to talk to computers
@@ -10,13 +13,41 @@
 3.Digital ASIC Design
 4.OpenLANE ASIC Flow
 ```
-### DAY 2
+### DAY 2-Floorplanning and Introduction to Standard Cells
+
+```
+1.Chip floorplanning considerations
+2.Floor planning
+3.Placement
+
+```
 ### DAY 3 -Library Cell Design using Magic and ngspice
 
-### DAY 4
-### DAY 5
+```
+1.Spice Deck
+2.16 mask CMOS process
+3.CMOS inverter ngspice simulations
+```
+### DAY 4 -Timing Analysis and Clock Tree Synthesis
+
+```
+1.Extracting LEF files
+2.Slack violation fixes
+3.Timing analysis using OpenSTA
+```
+### DAY 5 -RTL to GDS II
+
+```
+1.Power distribution network
+2.Routing
+3.SPEF extraction
+```
+ 
+## ABOUT THIS WORKSHOP
+  A 5 day workshop focusing on both theoritical and practical concepts of the RTL to GDSII flow with the help of opensource tool OpenLANE .The tool used the Google Skywater 130nm PDK files for the implementation.
 
 ## DAY 1-Introduction to Open Source EDA'S,openLANE and SKY130
+
 ### HOW TO TALK TO COMPUTERS
   Integrated circuit (IC) is an assembly of electronic components fabricated as a single unit, in which miniaturized active devices (e.g., transistors and diodes) and passive devices (e.g., capacitors and resistors) are present.The most important component on a integrated circuit is the chip which usually is present in the center of any pacakage.The core of the particular chip is where the digital logic resides.The packages contains several Foundry IPs,macros etc.,
       ![image](https://user-images.githubusercontent.com/86793947/124161468-115d5180-dabb-11eb-91c6-889fcfb8ea60.png)
@@ -409,7 +440,7 @@ Rise time =80%-20%
 
 ## DAY 4 - Timing Analysis and Clock Tree Synthesis
 
-## EXTRACTING LEF FILES
+### EXTRACTING LEF FILES
 
 The lef files are extracted and plugged into the picorv32a design and the challenges are observed
 
@@ -493,7 +524,25 @@ To include the extra lef cells add the following comments
     
  ![image](https://user-images.githubusercontent.com/86793947/124362566-53210000-dc53-11eb-9ada-f2eef877ef31.png)
  
- ## SLACK VIOLATIONS FIXES
+ The commands for the complete run after placing the standard cell is
+ 
+      1.run_synthesis 
+      
+      2.init_floorplan 
+      
+      3.place_io
+      
+      4.global_placement_or
+      
+      5.detailed_placement 
+      
+      6.tap_decap_or detailed_placement
+      
+      7.gen_pdn
+      
+      8.run_routing
+ 
+ ### SLACK VIOLATIONS FIXES
  
  Negative slack is not ideal to any design,so the slack values will have to be optimized and bought up to a positive value.Hence some changes could be made in the configuration directory
  
@@ -507,19 +556,62 @@ The slack time has reduced to zero
 
 ![image](https://user-images.githubusercontent.com/86793947/124363610-e3624380-dc59-11eb-853c-d820518f3646.png)
 
+After this,we run floor plan and placement.The window after placement looks like this
+
+![image](https://user-images.githubusercontent.com/86793947/124372070-9a37e100-dca5-11eb-9ff0-ab0282c4d137.png)
+
+The placement layout is viewed in magic using the command
+
+![image](https://user-images.githubusercontent.com/86793947/124372555-788c2900-dca8-11eb-9e9f-907cc951a5a0.png)
+
+and the cells looks like this
+
+![image](https://user-images.githubusercontent.com/86793947/124372557-8c378f80-dca8-11eb-8fbc-622f6906e490.png)
+
+
+### TIMING ANALYSIS USING OPENSTA
+
+We will have to define a sta configuration file and run it to find the timing parameters.The config file looks like the following
+
+![image](https://user-images.githubusercontent.com/86793947/124374026-564cd800-dcb5-11eb-8c77-719e6beeb412.png)
+
+
+The openSTA configuration file can be invoked as
+![image](https://user-images.githubusercontent.com/86793947/124374006-1ede2b80-dcb5-11eb-837d-07f067494ac4.png)
+
+
+## DAY 5 RTL TO GDSII 
+
+## POWER DISTRIBUTION NETWORK 
+The primary goal in  power network design is to provide enough power lines across a chip to reduce voltage drops from the power pads to the center of the chip. Voltage drops caused by the power network's metal lines coupled with transistor switching currents on the chip cause power supply noises that can affect circuit timing and performance, thus providing a constant challenge for designers of high-performance chips.
+
+To generate the power distribution network use the `gen_pdn` command
+
+![image](https://user-images.githubusercontent.com/86793947/124376469-c747bc00-dcc4-11eb-9bc1-020eeb6f0ad3.png)
+
+## ROUTING
+
+TritonRoute is used for routing of the designs.It is done in two stages.
+
+1.Global Routing - The input to global router is a floorplan that includes the locations of all fixed and flexible blocks. It generates a loose layout for each net .Assign a list of routing region to each net and without specifying the actual layout of wires .
+
+2.Detailed Routing- Find the actual geometry of each net with in the assigned routing region
+
+To run routing in OpenLANE execute the command `run_routing`
+
+![image](https://user-images.githubusercontent.com/86793947/124377159-2a871d80-dcc8-11eb-9e18-fbb049fda0a9.png)
+
+## SPEF Extraction
+After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file.
 
 
 
 
-    
-    
+## ACKNOWLEDGEMENTS
 
+Nickson Jose - VSD VLSI Engineer
 
-
- 
-    
-
-
+Kunal Ghosh - Co-founder (VSD Corp. Pvt. Ltd)
 
 
 
@@ -528,7 +620,6 @@ The slack time has reduced to zero
 
 
 
-### TIMING MODELING USING DELAY TABLES
 
 
 
