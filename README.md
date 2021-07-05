@@ -602,7 +602,7 @@ To run routing in OpenLANE execute the command `run_routing`
 ![image](https://user-images.githubusercontent.com/86793947/124377159-2a871d80-dcc8-11eb-9e18-fbb049fda0a9.png)
 
 ## SPEF Extraction
-After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file.
+After routing has been completed  parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file.
 
 
 
